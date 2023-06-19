@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>rvt2IFCConverter</RootNamespace>
     <AssemblyName>rvt2IFCConverter</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -41,12 +42,6 @@
   <ItemGroup>
     <Compile Include="rvt2IFC.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Logger\Logger\Logger.csproj">
-      <Project>{479c8c12-a70b-40e0-97b7-ab75409bc155}</Project>
-      <Name>Logger</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Journals\rvt2ifc.txt" />

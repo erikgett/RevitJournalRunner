@@ -10,8 +10,6 @@ namespace rvt2IFCConverter
 {
     public class rvt2IFC
     {
-        private static Logger logger = new Logger("rvt2IFC");
-
         [DllImport("USER32.DLL")]
         private static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
 
@@ -76,13 +74,11 @@ namespace rvt2IFCConverter
         {
             try
             {
-                logger.log("Closing process '" + process.ProcessName + "' with id " + process.Id);
                 process.Kill();
                 process.WaitForExit();
             }
             catch (Exception ex)
             {
-                logger.log(ex.Message, Logger.LogType.ERROR);
             }
         }
 
@@ -119,7 +115,6 @@ namespace rvt2IFCConverter
             startInfo.FileName = this.revitPath + @"\Revit.exe";
             startInfo.Arguments = journal + " /nosplash";
             process = Process.Start(startInfo);
-            logger.log("Process '" + process.ProcessName + "' with id " + process.Id + " started");
             do
             {
                 Thread.Sleep(1);
@@ -130,7 +125,6 @@ namespace rvt2IFCConverter
                 ShowWindow(process.MainWindowHandle, HIDE);
                 if (FindWindow(null, "Journal Error") != IntPtr.Zero)
                 {
-                    logger.log("Unknown error", Logger.LogType.ERROR);
                     tryToKill(process);
                     return false;
                 }
@@ -159,7 +153,6 @@ namespace rvt2IFCConverter
 
                 for (var i = 0; i < journals.Length; i++)
                 {
-                    logger.log("Launching Revit with journal file " + journals[i]);
                     if (Convert_(journals[i], inFile, outFile))
                     {
                         return true;
@@ -169,7 +162,6 @@ namespace rvt2IFCConverter
             }
             catch (Exception e)
             {
-                logger.log(e.Message, Logger.LogType.ERROR);
                 processes = Process.GetProcessesByName("Revit");
                 for (var i = 0; i < processes.Length; i++)
                 {
